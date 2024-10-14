@@ -19,7 +19,7 @@ let needed = {
 	color: "grey",
 	size: "small",
 	brand: "gildan",
-	quantity: 1 
+	quantity: 6 
 	}
 }
 
