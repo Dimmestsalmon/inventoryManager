@@ -6,9 +6,14 @@ const cors = require('cors');
 server.use(express.json())
 server.use(
   cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
   })
 );
 server.get('/', (req, res) => res.send('Hello Cici!'))
+
+server.get('/inventoryList', (req, res) => {
+  knex.select('*').from('shirts')
+  .then(data => res.send(data))
+})
 
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
