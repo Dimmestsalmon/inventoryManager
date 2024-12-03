@@ -8,37 +8,43 @@ const AddInventory = () =>{
   const [newSize, setNewSize] = useState()
   const [newQuantity, setNewQuantity] = useState()
   const [newLocation, setNewLocation] = useState()
+  const [newShirt, setNewShirt] = useState({})
 
   const addBrand = () => {
     setNewBrand(event.target.value)
-    console.log(newBrand)
   }
 
   const addColor = () => {
     setNewColor(event.target.value)
-    console.log(newColor)
   }
 
   const addStyle = () => {
     setNewStyle(event.target.value)
-    console.log(newStyle)
   }
 
   const addSize = () => {
     setNewSize(event.target.value)
-    console.log(newSize)
   }
 
   const addQuantity = () => {
     setNewQuantity(event.target.value)
-    console.log(newQuantity)
   }
 
   const addLocation = () => {
     setNewLocation(event.target.value)
-    console.log(newLocation)
   }
 
+  const addNewInventory = () =>{
+    setNewShirt({
+        "brand": addBrand,
+        "color": addColor,
+        "style": addStyle,
+        "size": addSize,
+        "quantity": addQuantity,
+        "location": addLocation
+    })
+    console.log(newShirt)
+  }
 
   return(
     <>
@@ -58,7 +64,7 @@ const AddInventory = () =>{
     </select>
     <input type='number' placeholder = 'Quantity' onChange = {addQuantity}/>
     <input type='text' placeholder = 'Location' onChange = {addLocation}/>
-    <button>Add</button>
+    <button onClick = {addNewInventory}>Add</button>
     </form>
     <Link to = '/'>Home</Link>
     </>
