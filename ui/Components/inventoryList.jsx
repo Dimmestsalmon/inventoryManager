@@ -21,17 +21,32 @@ if(inventory){
   return(
     <>
       <h1>Inventory List</h1>
+      <table>
+          <thead>
+            <tr>
+              <th>BRAND</th>
+              <th>COLOR</th>
+              <th>STYLE</th>
+              <th>SIZE</th>
+              <th>QUANTITY</th>
+              <th>LOCATION</th>
+            </tr>
+          </thead>
+          <tbody>
       {inventory.map((shirt)=>{
         return (
-        <ul>
-          <li>{shirt.brand}</li>
-          <li>{shirt.color}</li>
-          <li>{shirt.location}</li>
-          <li>{shirt.quantity}</li>
-          <li>{shirt.size}</li>
-          <li>{shirt.style}</li>
-        </ul>
+            <tr>
+              <td>{shirt.brand}</td>
+              <td>{shirt.color}</td>
+              <td>{shirt.style}</td>
+              <td>{shirt.size}</td>
+              <td>{shirt.quantity}</td>
+              <td>{shirt.location}</td>
+            </tr>
+
         )})}
+        </tbody>
+        </table>
         <Link to = '/'>Home</Link>
       </>
   )

@@ -18,7 +18,7 @@ server.get('/inventoryList', (req, res) => {
 
 server.post('/addInventory', (req, res) => {
   knex('shirts').insert(req.body)
-  .then(res.send('added'))
+  .then(res.send('completed add'))
 })
 
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
