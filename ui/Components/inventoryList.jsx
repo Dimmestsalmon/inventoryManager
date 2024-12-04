@@ -6,7 +6,6 @@ const InventoryList = () => {
   const [allInventory, setAllInventory] = useState(true)
   const [inventory, setInventory] = useState(undefined)
 
-
   const showInventory = () =>{
     console.log(allInventory)
     setAllInventory(!allInventory)
@@ -16,6 +15,17 @@ const InventoryList = () => {
         .then((res) => res.json())
         .then((data) => setInventory(data))
   }, [allInventory])
+
+  const removeShirt = (id) =>{
+    let newId = {id}
+
+    fetch("http://localhost:8080/inventoryList", {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newId)
+    })}
 
 if(inventory){
   return(
@@ -42,6 +52,7 @@ if(inventory){
               <td>{shirt.size}</td>
               <td>{shirt.quantity}</td>
               <td>{shirt.location}</td>
+              <td><button onClick = {() => removeShirt(shirt.id)}>Remove Shirt</button></td>
             </tr>
 
         )})}

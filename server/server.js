@@ -15,10 +15,13 @@ server.get('/inventoryList', (req, res) => {
   knex.select('*').from('shirts')
   .then(data => res.send(data))
 })
+server.patch('/inventoryList', (req, res) => {
+  knex('shirts').where('id', '=', req.body.id).decrement('quantity', 1);
+})
 
 server.post('/addInventory', (req, res) => {
   knex('shirts').insert(req.body)
-  .then(res.send('completed add'))
+  res.send('added')
 })
 
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))

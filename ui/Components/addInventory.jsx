@@ -26,7 +26,9 @@ const AddInventory = () =>{
       "size": newSize,
       "quantity": newQuantity,
       "location": newLocation
-    })}
+    })
+    window.location.reload()
+  }
 
   useEffect(()=> {
     if(newShirt.size){
@@ -38,8 +40,6 @@ const AddInventory = () =>{
         body: JSON.stringify(newShirt)
       })}
   }, [newShirt])
-
-
 
 
   return(
