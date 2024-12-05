@@ -3,31 +3,44 @@ import {Link} from 'react-router-dom'
 
 
 const InventoryList = () => {
-  const [allInventory, setAllInventory] = useState(true)
+  const [renderAllInventory, setrenderAllInventory] = useState(true)
   const [inventory, setInventory] = useState(undefined)
 
-  const showInventory = () =>{
-    console.log(allInventory)
-    setAllInventory(!allInventory)
-  }
   useEffect(()=>{
       fetch("http://localhost:8080/inventoryList")
         .then((res) => res.json())
         .then((data) => setInventory(data))
-  }, [allInventory])
+  }, [renderAllInventory])
 
-  const removeShirt = (id) =>{
+  const pullShirt = (id) =>{
     let newId = {id}
-
     fetch("http://localhost:8080/inventoryList", {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newId)
-    })}
+    })
+    .then(window.location.reload())
+  }
 
-if(inventory){
+  const deleteShirt = (id) =>{
+    let newId = {id}
+    fetch("http://localhost:8080/inventoryList", {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newId)
+    })
+    .then(setrenderAllInventory(!renderAllInventory))
+  }
+
+if(inventory === undefined){
+  return (
+    <h1>Loading</h1>
+  )
+}
   return(
     <>
       <h1>Inventory List</h1>
@@ -52,7 +65,7 @@ if(inventory){
               <td>{shirt.size}</td>
               <td>{shirt.quantity}</td>
               <td>{shirt.location}</td>
-              <td><button onClick = {() => removeShirt(shirt.id)}>Remove Shirt</button></td>
+              <td><button onClick = {shirt.quantity === 1 ? () => deleteShirt(shirt.id) : () => pullShirt(shirt.id)}>Remove Shirt</button></td>
             </tr>
 
         )})}
@@ -61,6 +74,6 @@ if(inventory){
         <Link to = '/'>Home</Link>
       </>
   )
-}}
+}
 
 export default InventoryList;

@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 
+
 const AddInventory = () =>{
   const [newBrand, setNewBrand] = useState('Gildan')
   const [newColor, setNewColor] = useState(null)
@@ -9,6 +10,7 @@ const AddInventory = () =>{
   const [newQuantity, setNewQuantity] = useState()
   const [newLocation, setNewLocation] = useState()
   const [newShirt, setNewShirt] = useState({})
+  const [shirtWasAdded, setShirtWasAdded] = useState(undefined)
 
   const addBrand = () => setNewBrand(event.target.value)
   const addColor = () => setNewColor(event.target.value)
@@ -27,7 +29,7 @@ const AddInventory = () =>{
       "quantity": newQuantity,
       "location": newLocation
     })
-    window.location.reload()
+    // window.location.reload()
   }
 
   useEffect(()=> {
@@ -38,13 +40,32 @@ const AddInventory = () =>{
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newShirt)
-      })}
+      })
+      .then(res => res.json())
+      .then(data => setShirtWasAdded(data))
+    }
+
   }, [newShirt])
+
+  useEffect(() => {if (shirtWasAdded != undefined){
+    console.log(shirtWasAdded.quantity)
+    let dialog = (document.querySelector("dialog"))
+    dialog.showModal();
+  }}, [shirtWasAdded])
+
+
 
 
   return(
     <>
     <h1>Add Inventory</h1>
+    {shirtWasAdded ? <dialog>
+      <p>Added {shirtWasAdded.quantity} {shirtWasAdded.color} {shirtWasAdded.style} {shirtWasAdded.brand}</p>
+      <form method="dialog">
+        <button>Add More Shirts</button>
+        <button><Link to="/inventoryList">Return to inventory list</Link></button>
+      </form>
+    </dialog> : <></>}
     <form>
     <input type='text' placeholder = 'Brand (Gildan if blank)' onChange = {addBrand}/>
     <input type='text' placeholder = 'Color(Required)' onChange = {addColor}/>

@@ -16,12 +16,18 @@ server.get('/inventoryList', (req, res) => {
   .then(data => res.send(data))
 })
 server.patch('/inventoryList', (req, res) => {
-  knex('shirts').where('id', '=', req.body.id).decrement('quantity', 1);
+  console.log(req.body)
+  knex('shirts').where('id', '=', req.body.id).decrement('quantity', 1)
+  .then(res.send(req.body))
+})
+server.delete('/inventoryList', (req, res) => {
+  knex('shirts').where('id', '=', req.body.id).delete()
+  .then(res.send(req.body))
 })
 
 server.post('/addInventory', (req, res) => {
   knex('shirts').insert(req.body)
-  res.send('added')
+  .then(res.send(req.body))
 })
 
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
