@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 const port = 8080;
-const knex = require('knex')(require('./knexfile.js')['development']);
+const knex = require('knex')(require('./knexfile.js')['production']);
 const cors = require('cors');
 server.use(express.json())
 server.use(
