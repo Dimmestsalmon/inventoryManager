@@ -32,3 +32,4 @@ server.post('/addInventory', (req, res) => {
 
 server.listen(3000, () => console.log('Server ready on port 3000.'));
 
+export default server
