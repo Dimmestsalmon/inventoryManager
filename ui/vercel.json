@@ -2,12 +2,12 @@
     "version": 2,
     "builds": [
         {
-            "src": "./index.py",
-            "use": "@vercel/python"
+            "src": "./App.jsx",
+            "use": "@vercel/node"
         }
     ],
     "rewrites": [
-        { "source": "/(.*)", "destination": "src/app.js" }
+        { "source": "/(.*)", "destination": "server/index.js" }
     ],
     "headers": [
         {
