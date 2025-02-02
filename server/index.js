@@ -1,6 +1,5 @@
 const express = require('express');
 const server = express();
-const port = 3000;
 const knex = require('knex')(require('./knexfile.js')['production']);
 /*const cors = require('cors');
 server.use(express.json())
@@ -30,4 +29,6 @@ server.post('/addInventory', (req, res) => {
   .then(res.send(req.body))
 })
 
-server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
+server.listen(3000, () => console.log('Server ready on port 3000.'));
+
