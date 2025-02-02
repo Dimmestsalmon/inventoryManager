@@ -1,13 +1,13 @@
 const express = require('express');
 const server = express();
 const knex = require('knex')(require('./knexfile.js')['production']);
-/*const cors = require('cors');
+const cors = require('cors');
 server.use(express.json())
 server.use(
   cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: '*',
   })
-);*/
+);
 server.get('/', (req, res) => res.send('Hello Cici!'))
 
 server.get('/inventoryList', (req, res) => {
