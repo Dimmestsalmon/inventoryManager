@@ -1,13 +1,8 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "./App.jsx",
-            "use": "@vercel/node"
-        }
-    ],
+
     "rewrites": [
-        { "source": "/(.*)", "destination": "server/index.js" }
+        { "source": "/(.*)", "destination": "api" }
     ],
     "headers": [
         {
@@ -24,3 +19,4 @@
         }  
     ]
 }
+
