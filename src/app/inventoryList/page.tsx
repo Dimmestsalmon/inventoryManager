@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import Link from "next/link";
 
 export default async function InventoryList() {
   async function getData() {
@@ -11,6 +12,7 @@ export default async function InventoryList() {
 
   return (
       <>
+        <Link href="./">Return Home</Link>
         <div>Inventory list goes here</div>
         <ul>
           {inventoryList.map((item: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }) => (

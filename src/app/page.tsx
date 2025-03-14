@@ -30,9 +30,9 @@ export default async function Home() {
           <h1>Inventory Manager</h1>
           <h3>Welcome {session.user.name}</h3>
         <div>
-          <Link href="/pages/inventoryList">Show Inventory</Link>
-          <Link href="/pages/addInventory">Add Inventory</Link>
-          <Link href="/pages/compareToOrder">Compare to Order</Link>
+          <Link href="./inventoryList">Show Inventory</Link>
+          <Link href="./addInventory">Add Inventory</Link>
+          <Link href="./compareToOrder" hidden>Compare to Order</Link>
         </div>
         </>
     )
