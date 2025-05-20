@@ -5,10 +5,18 @@ export default async function InventoryList() {
   async function getData() {
     const sql = neon(process.env.DATABASE_URL!);
     const list = await sql("SELECT * FROM inventory");
-    return list;
+    return list as {
+      id: number;
+      brand: string;
+      color: string;
+      style: string;
+      size: string;
+      quantity: number;
+      location: string;
+    }[];
   }
 
-  const inventoryList = await getData();
+  const inventoryList: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }[] = await getData();
 
   return (
       <>
