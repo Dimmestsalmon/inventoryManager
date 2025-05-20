@@ -12,7 +12,7 @@ export default function AddInventory() {
       const size :FormDataEntryValue|null = formData.get('size')
       const quantity :FormDataEntryValue|null = formData.get('quantity')
       const location :FormDataEntryValue|null = formData.get('location')
-      const sql = neon(process.env.DATABASE_URL);
+      const sql = neon(process.env.DATABASE_URL!);
       await sql("INSERT INTO inventory (brand, color, style, size, quantity, location) VALUES ($1, $2, $3, $4, $5, $6)", [brand, color, style, size, quantity, location])
     }
 
