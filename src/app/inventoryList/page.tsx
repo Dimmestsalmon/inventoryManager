@@ -21,11 +21,11 @@ export default async function InventoryList() {
   return (
       <>
         <Link href="./">Return Home</Link>
-        <div>Inventory list goes here</div>
         <ul>
           {inventoryList.map((item: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }) => (
               <li key={item.id}>{item.brand}{item.color}{item.style}{item.size}{item.quantity}{item.location}</li>
           ))}
+          <button type = "button"> remove </button>
         </ul>
       </>
   );
