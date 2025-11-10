@@ -2,6 +2,8 @@ import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = 'force-dynamic';
+
 export default async function InventoryList() {
   const sql = neon(process.env.DATABASE_URL!);
   
