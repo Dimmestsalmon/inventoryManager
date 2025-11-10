@@ -45,6 +45,7 @@ export default async function InventoryList() {
             {item.brand} {item.color} {item.style} {item.size} {item.quantity} {item.location}
             <form action={removeItem} style={{ display: 'inline' }}>
               <input type="hidden" name="id" value={item.id} />
+              <button type = "button"></button> {/*remove this later for spacig*/}
               <button type="submit">remove</button>
             </form>
           </li>
