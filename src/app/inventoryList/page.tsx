@@ -4,10 +4,24 @@ import { revalidatePath } from "next/cache";
 
 export const dynamic = 'force-dynamic';
 
-export default async function InventoryList() {
+// Move the Server Action OUTSIDE the component
+async function removeItem(formData: FormData) {
+  'use server';
+  
+  const id = formData.get('id') as string;
   const sql = neon(process.env.DATABASE_URL!);
   
+  try {
+    await sql("DELETE FROM inventory WHERE id = $1", [id]);
+    revalidatePath('/inventorylist');
+  } catch (error) {
+    console.log("Remove item failed", error);
+  }
+}
+
+export default async function InventoryList() {
   async function getData() {
+    const sql = neon(process.env.DATABASE_URL!);
     const list = await sql("SELECT * FROM inventory");
     return list as {
       id: number;
@@ -18,19 +32,6 @@ export default async function InventoryList() {
       quantity: number;
       location: string;
     }[];
-  }
-  
-  async function removeItem(formData: FormData) {
-    'use server';
-    
-    const id = formData.get('id') as string;
-    
-    try {
-      await sql("DELETE FROM inventory WHERE id = $1", [id]);
-      revalidatePath('/inventoryList');
-    } catch {
-      console.log("Remove item failed");
-    }
   }
   
   const inventoryList = await getData();
