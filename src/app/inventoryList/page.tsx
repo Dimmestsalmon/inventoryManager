@@ -1,4 +1,5 @@
 import { neon } from "@neondatabase/serverless";
+import RemoveButton from "@/components/RemoveButton";
 import Link from "next/link";
 
 export default async function InventoryList() {
@@ -17,17 +18,6 @@ export default async function InventoryList() {
     }[];
   }
 
-async function removeItem(formData: FormData) {
-    'use server';
-    
-    const id = formData.get('id') as string;
-    
-    try {
-      await sql("DELETE FROM inventory WHERE id = $1", [id]);
-    } catch {
-      console.log("Remove item failed");
-    }
-  }
   const inventoryList: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }[] = await getData();
 
   return (
@@ -37,7 +27,7 @@ async function removeItem(formData: FormData) {
           {inventoryList.map((item: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }) => (
               <li key={item.id}>
                 {item.brand}{item.color}{item.style}{item.size}{item.quantity}{item.location}
-                <button type="submit">remove</button>
+                <RemoveButton id={item.id} />
               </li>
               
           ))}
