@@ -37,7 +37,7 @@ async function removeItem(formData: FormData) {
           {inventoryList.map((item: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }) => (
               <li key={item.id}>
                 {item.brand}{item.color}{item.style}{item.size}{item.quantity}{item.location}
-                <button type = "button" onClick={removeItem}> remove </button>
+                <button type="submit">remove</button>
               </li>
               
           ))}
