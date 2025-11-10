@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
-import RemoveButton from "@/components/RemoveButton";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 export default async function InventoryList() {
   const sql = neon(process.env.DATABASE_URL!);
@@ -18,6 +18,18 @@ export default async function InventoryList() {
     }[];
   }
 
+async function removeItem(formData: FormData) {
+    'use server';
+    
+    const id = formData.get('id') as string;
+    
+    try {
+      await sql("DELETE FROM inventory WHERE id = $1", [id]);
+      revalidatePath('/inventory-list'); // Update with your actual path
+    } catch {
+      console.log("Remove item failed");
+    }
+  }
   const inventoryList: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }[] = await getData();
 
   return (
@@ -27,7 +39,7 @@ export default async function InventoryList() {
           {inventoryList.map((item: { id: number; brand: string; color: string; style: string; size: string; quantity: number; location: string  }) => (
               <li key={item.id}>
                 {item.brand}{item.color}{item.style}{item.size}{item.quantity}{item.location}
-                <RemoveButton id={item.id} />
+                <button type = "button" onClick={removeItem}> remove </button>
               </li>
               
           ))}
